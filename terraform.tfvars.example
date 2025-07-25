@@ -1,0 +1,106 @@
+# =============================================================================
+# Terraform Variables Configuration Example
+# =============================================================================
+# Copy this file to terraform.tfvars and customize the values for your environment
+# 
+# IMPORTANT: Never commit terraform.tfvars to version control if it contains
+# sensitive information like email addresses or API keys.
+
+# =============================================================================
+# Project Configuration
+# =============================================================================
+
+# Name of your monitoring project (used in resource naming)
+project_name = "my-serverless-monitoring"
+
+# Environment (dev, staging, prod)
+environment = "dev"
+
+# Project owner or team name
+project_owner = "DevOps-Team"
+
+# AWS region where resources will be created
+aws_region = "us-east-1"
+
+# =============================================================================
+# Monitoring Targets (CUSTOMIZE THESE FOR YOUR API)
+# =============================================================================
+
+# Name of your existing API Gateway to monitor
+# Find this in the AWS Console: API Gateway > APIs > Your API Name
+monitored_api_name = "your-api-gateway-name"
+
+# List of your existing Lambda functions to monitor
+# Find these in the AWS Console: Lambda > Functions
+monitored_lambda_functions = [
+  "your-auth-function",
+  "your-api-handler",
+  "your-data-processor",
+  "your-file-handler"
+]
+
+# =============================================================================
+# Alert Configuration
+# =============================================================================
+
+# Primary email for receiving alerts
+alert_email = "your-email@company.com"
+
+# Additional emails for alerts (optional)
+additional_alert_emails = [
+  "backup-oncall@company.com",
+  "team-lead@company.com"
+]
+
+# =============================================================================
+# Alert Thresholds (Adjust based on your traffic patterns)
+# =============================================================================
+
+# Number of 4XX errors that trigger an API Gateway alert
+api_error_threshold = 5
+
+# Lambda execution time threshold in milliseconds
+lambda_duration_threshold_ms = 10000
+
+# Number of 4XX errors per hour that triggers security alert
+security_error_threshold = 10
+
+# Number of evaluation periods before triggering alarm
+alarm_evaluation_periods = 2
+
+# Period for metric evaluation (60, 300, 900, or 3600 seconds)
+metric_period_seconds = 300
+
+# =============================================================================
+# Security Monitoring Configuration
+# =============================================================================
+
+# Schedule for security monitoring checks
+# Examples:
+# - "rate(15 minutes)" - every 15 minutes
+# - "rate(1 hour)" - every hour  
+# - "cron(0 * * * ? *)" - every hour on the hour
+monitoring_schedule = "rate(15 minutes)"
+
+# =============================================================================
+# Feature Flags
+# =============================================================================
+
+# Enable/disable security monitoring Lambda function
+enable_security_monitoring = true
+
+# Enable/disable CloudWatch dashboard creation
+enable_dashboard = true
+
+# Enable detailed CloudWatch monitoring (additional costs)
+enable_detailed_monitoring = false
+
+# =============================================================================
+# Additional Tags (Optional)
+# =============================================================================
+
+tags = {
+  CostCenter = "Engineering"
+  Team       = "Platform"
+  Purpose    = "API-Monitoring"
+}
